@@ -23,19 +23,19 @@
         <table class="table">
             <tr>
                 <td class="col-md-2">
-                    <button class="btn btn-default" id="espresso">Espresso</button>
+                    <button class="btn btn-default" id="espresso" value='3.25'>Espresso</button>
                 </td>
                 <td class="col-md-2">
-                    <button class="btn btn-default" id="latte">Latte</button>
+                    <button class="btn btn-default" id="latte" value='4.15'>Latte</button>
                 </td>
                 <td class="col-md-2">
-                    <button class="btn btn-default" id="hot-chocolate">Hot Chocolate</button>
+                    <button class="btn btn-default" id="hot-chocolate" value='2.50'>Hot Chocolate</button>
                 </td>
             </tr>
             <tr>
-                <td>$3.25</td>
-                <td>$4.15</td>
-                <td>$2.50</td>
+                <td id='espressoPrice' >$3.25</td>
+                <td id='lattePrice'>$4.15</td>
+                <td id='hotChocolate'>$2.50</td>
             </tr>
         </table>
 
@@ -50,19 +50,37 @@
 
     var myRevenueMessage = document.getElementById("revenue");
     var drinksOrdered = [];
+    var drinksOrderedCosts = [];
+    var totalPrice;
+
 
     $("img#coffee_image").attr("src", "static/coffee_beans.jpg");
     $('img#coffee_image').on('click', function () { return makeCoffee('brew'); });
 
+    $('button#espresso').on('click', function () { return makeCoffee('espresso'); });
+    $('button#latte').on('click', function () { return makeCoffee('latte'); });
+    $('button#hot-chocolate').on('click', function () { return makeCoffee('hot-chocolate'); });
+
     function makeCoffee(drinkType) {
 
-        drinksOrdered.push(drinkType);
-        console.log(drinksOrdered);
+        // drinksOrdered.push(drinkType);
+        // console.log(drinksOrdered);
+        var drinkPrice = $('#'+drinkType).attr("value");
+        //var test = parseFloat($(drinkType).attr("value")).toFixed(2);
+        //console.log(drinkPrice);
+        drinksOrderedCosts.push(drinkPrice);
+        //console.log(drinksOrderedCosts);
 
         $("img#coffee_image").attr("src", "static/coffee_machine.jpg");
         setTimeout(function() { $("img#coffee_image").attr("src", "static/coffee_mug.jpg"); }, 1500);
         setTimeout(function() { $("img#coffee_image").attr("src", "static/coffee_beans.jpg"); }, 4000);
 
+        totalPrice = 0;
+        for (var i=0; i < drinksOrderedCosts.length; i++){
+            totalPrice = totalPrice + parseFloat(drinksOrderedCosts[i]).toFixed(2);
+        }
+        console.log(totalPrice)
+        $("#revenue").html(totalPrice);
     }
 
 </script>
