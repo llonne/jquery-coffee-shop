@@ -49,11 +49,16 @@
     "use strict";
 
     var myRevenueMessage = document.getElementById("revenue");
+    var drinksOrdered = [];
 
     $("img#coffee_image").attr("src", "static/coffee_beans.jpg");
-    $('img#coffee_image').on('click', makeCoffee);
+    $('img#coffee_image').on('click', function () { return makeCoffee('brew'); });
 
-    function makeCoffee() {
+    function makeCoffee(drinkType) {
+
+        drinksOrdered.push(drinkType);
+        console.log(drinksOrdered);
+
         $("img#coffee_image").attr("src", "static/coffee_machine.jpg");
         setTimeout(function() { $("img#coffee_image").attr("src", "static/coffee_mug.jpg"); }, 1500);
         setTimeout(function() { $("img#coffee_image").attr("src", "static/coffee_beans.jpg"); }, 4000);
