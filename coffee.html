@@ -63,23 +63,18 @@
 
     function makeCoffee(drinkType) {
 
-        // drinksOrdered.push(drinkType);
-        // console.log(drinksOrdered);
         var drinkPrice = $('#'+drinkType).attr("value");
-        //var test = parseFloat($(drinkType).attr("value")).toFixed(2);
-        //console.log(drinkPrice);
+
         drinksOrderedCosts.push(drinkPrice);
-        //console.log(drinksOrderedCosts);
 
         $("img#coffee_image").attr("src", "static/coffee_machine.jpg");
         setTimeout(function() { $("img#coffee_image").attr("src", "static/coffee_mug.jpg"); }, 1500);
         setTimeout(function() { $("img#coffee_image").attr("src", "static/coffee_beans.jpg"); }, 4000);
 
-        totalPrice = 0;
+        totalPrice = 0.0;
         for (var i=0; i < drinksOrderedCosts.length; i++){
-            totalPrice = totalPrice + parseFloat(drinksOrderedCosts[i]).toFixed(2);
+            totalPrice += parseFloat(drinksOrderedCosts[i]);
         }
-        console.log(totalPrice)
         $("#revenue").html(totalPrice);
     }
 
